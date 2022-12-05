@@ -5,11 +5,8 @@ def split_arr(arr):
     chunk_size = len(arr) // 2
     return [arr[i: i + chunk_size] for i in range(0, len(arr), chunk_size)]
 
-def compare(arr1, arr2):
-    return frozenset(arr1).intersection(arr2)
-
-def compare3(arr1, arr2, arr3):
-    return frozenset(arr1).intersection(arr2, arr3)
+def compare(arr1, *argv):
+    return frozenset(arr1).intersection(*argv)
 
 def generate_dict():
     lower = dict(zip(string.ascii_lowercase, [v + 1 for v in range(26)]))
@@ -38,7 +35,7 @@ def part2():
     data = data_loading.load_data(3, 1)
     matches = []
     for i in range(0, len(data), 3):
-        matches.append(compare3(data[i], data[i+1], data[i+2]))
+        matches.append(compare(data[i], data[i+1], data[i+2]))
     total = map_values(matches)
     
     return total
